@@ -1,13 +1,16 @@
 package com.javahackers;
 
 import java.util.Scanner;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 
 public class FinanceManager {
     static String temp = "";
@@ -48,7 +51,9 @@ public class FinanceManager {
             @Override
             public void actionPerformed(ActionEvent e) {
                 temp = deposit.getText();
-                stuffie.setBounds(500, 0, 500, 1000);
+                stuffie.setBounds(500, 0, 500, 780);
+                Border border = BorderFactory.createBevelBorder(0,Color.BLACK,Color.GRAY);
+                stuffie.setBorder(border);
                 deposit.setBounds(0,0, 1,1);
             };
         });
