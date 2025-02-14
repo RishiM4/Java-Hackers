@@ -29,6 +29,7 @@ public class FinanceManager {
     static JLabel moneys4;
     static JLabel moneys5;
     static JLabel moneys6;
+    static JLabel jfj;
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Finance Manager");
