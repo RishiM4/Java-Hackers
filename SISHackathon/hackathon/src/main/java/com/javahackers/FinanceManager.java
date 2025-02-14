@@ -9,12 +9,19 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 public class FinanceManager {
     static String temp = "";
-    static String budg = "";
+    static double budg = 0;
+    static double won = (budg * 1438.76);
+    static double rupees = (budg * 86.79);
+    static double euro = (budg * 0.95);
+    static double yen = (budg * 152.53);
+    static double dirham = (budg * 3.67);
+    static double bitcoiny = (budg * 0.000010);
     public static void main(String[] args) {
         JFrame frame = new JFrame("Finance Manager");
         frame.setSize(frame.getMaximumSize());
@@ -36,7 +43,11 @@ public class FinanceManager {
         JTextField budget = new JTextField();
         budget.setBounds(750, 225, 250, 300);
         frame.add(budget);
-        budg = budget.getText();
+        try {
+            budg = Integer.parseInt(budget.getText());
+        } catch (Exception e) {
+        }
+        JLabel budgetladel = new JLabel();
         
                 JButton button = new JButton();
                 button.setBounds(10, 225, 490,100);
@@ -51,7 +62,7 @@ public class FinanceManager {
                     }
                 });
                 JButton button2 = new JButton();
-                button2.setBounds(1000, 225, 490,150);
+                button2.setBounds(1000, 225, 490,100);
                 button2.setText("Click to see History of Transactions/Deposits");
                 frame.add(button2);
                 button2.addActionListener(new ActionListener() {
@@ -65,7 +76,7 @@ public class FinanceManager {
                     };
                 });
                 JButton button3 = new JButton();
-                button3.setBounds(1000, 375, 490,150);
+                button3.setBounds(1000, 325, 490,100);
                 button3.setText("Click to add record of Transaction/Deposit again");
                 frame.add(button3);
                 button3.addActionListener(new ActionListener() {
@@ -85,13 +96,20 @@ public class FinanceManager {
                 button4.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        budg = budget.getText();
+                        try {
+                            budg = Integer.parseInt(budget.getText());
+                        } catch (Exception f) {
+                            JOptionPane.showMessageDialog(frame, "Please enter a Integer without a currency sign    ", "error", 0);
+                           return;
+                        }
                         deposit.setBounds(500,225, 250,300);
                         budget.setBounds(750, 225, 250, 300);
-                        JLabel budgetladel = new JLabel();
                         budgetladel.setBounds(100, 50, 300, 100);
-                        budgetladel.setText("Your Budget For Today Is : " + budg);
+                        budgetladel.setText("");
+                        budgetladel.setText("Your Budget For Today Is : $" + budg);
                         frame.add(budgetladel);
+                        frame.setSize(399,399);
+                        frame.setSize(frame.getMaximumSize());
                     };
                 });
                 JButton button5 = new JButton();
@@ -104,6 +122,39 @@ public class FinanceManager {
                         stuffie.setText("");
                     };
                 });
-        
+                JLabel moneys= new JLabel("");
+                moneys.setBounds(390, 690, 800, 100);
+
+                frame.add(moneys);
+                JButton button6 = new JButton();
+                button6.setBounds(1000, 425, 490,100);
+                button6.setText("Click to convert your budget to a different currency");
+                frame.add(button6);
+                button6.addActionListener(new ActionListener() {
+                    
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        try {
+                            budg = Integer.parseInt(budget.getText());
+                        } catch (Exception f) {
+                            // TODO: handle exception
+                        }
+                          won = (budg * 1438.76);
+
+                            rupees = (budg * 86.79);
+                          euro = (budg * 0.95);
+                          yen = (budg * 152.53);
+                          dirham = (budg * 3.67);
+                          bitcoiny = (budg * 0.000010);
+                        moneys.setText("$" + budg + " = " + won + " won, \n" + rupees + "rupees, \n" + euro + "euros, \n" + yen + "yen, \n" + dirham + "Dirhams, & \n" + bitcoiny + "bitcoins!");
+                       
+                        frame.setSize(399,399);
+                        frame.setSize(frame.getMaximumSize());
+                    };
+                });
+
+                frame.setSize(399,399);
+                frame.setSize(frame.getMaximumSize());
             }
+            
 }
