@@ -123,8 +123,7 @@ public class FinanceManager {
                     };
                 });
                 JLabel moneys= new JLabel("");
-                moneys.setBounds(390, 690, 800, 100);
-
+                moneys.setBounds(390, 600, 800, 100);
                 frame.add(moneys);
                 JButton button6 = new JButton();
                 button6.setBounds(1000, 425, 490,100);
@@ -140,8 +139,7 @@ public class FinanceManager {
                             // TODO: handle exception
                         }
                           won = (budg * 1438.76);
-
-                            rupees = (budg * 86.79);
+                          rupees = (budg * 86.79);
                           euro = (budg * 0.95);
                           yen = (budg * 152.53);
                           dirham = (budg * 3.67);
