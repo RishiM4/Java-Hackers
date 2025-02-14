@@ -15,19 +15,20 @@ public class Gaming {
     public static void main(String[] args) {
         AutoClicker autoClicker = new AutoClicker(); 
         KeyBoardMacro keyBoardMacro = new KeyBoardMacro();
-        ScreenShot screenshot = new ScreenShot();
+        AudioPlayer audioplayer = new AudioPlayer();
         currentPanel = new JPanel();
         frame.setSize(500,500);
         frame.setVisible(true);
         JMenuBar menuBar = new JMenuBar();
         JMenu autoclicker = new JMenu("Autoclicker");
         JMenu keyBoardScript = new JMenu("Keyboard Scripts");
-        JMenu screenShot = new JMenu("Screen Shot");
-    
+        JMenu audioPlayer = new JMenu("Audio Player");
+        
+        JPanel audioPanel = audioplayer.createPanel();
         
         menuBar.add(autoclicker);
         menuBar.add(keyBoardScript);
-        menuBar.add(screenShot);
+        menuBar.add(audioPlayer);
         autoclicker.addMouseListener(new MouseListener() {
 
             @Override
@@ -82,7 +83,7 @@ public class Gaming {
             public void mouseExited(MouseEvent e) {}
             
         });
-        screenShot.addMouseListener(new MouseListener() {
+        audioPlayer.addMouseListener(new MouseListener() {
 
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -92,7 +93,7 @@ public class Gaming {
             @Override
             public void mousePressed(MouseEvent e) {
                 frame.remove(currentPanel);
-                currentPanel = screenshot.createPanel();
+                currentPanel = audioPanel;
                 frame.add(currentPanel);
                 frame.setSize(399,399);
                 frame.setSize(400,400);

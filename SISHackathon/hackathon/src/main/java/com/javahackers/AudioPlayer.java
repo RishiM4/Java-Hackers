@@ -15,16 +15,16 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class AudioPlayer {
     static Clip clip;
     static AudioInputStream audioInputStream;
     static int position = 0;
-    public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        frame.setSize(400,400);
-        frame.setVisible(true);
+    public JPanel createPanel() {
+        JPanel panel = new JPanel();
+        panel.setSize(400,400);
+        panel.setVisible(true);
         try {
             AudioInputStream audioInputStream =  AudioSystem.getAudioInputStream(new File("C:\\Users\\Rishi (New)\\Downloads\\sound\\crab rave.wav").getAbsoluteFile()); 
             clip = AudioSystem.getClip();
@@ -37,11 +37,11 @@ public class AudioPlayer {
         }
         JButton pause = new JButton("Pause");
         JButton play = new JButton("Play");
-        frame.setLayout(null);
+        panel.setLayout(null);
         pause.setBounds(100,100,100,100);
         pause.setBounds(100,210,100,100);
-        frame.add(play);
-        frame.add(pause);
+        panel.add(play);
+        panel.add(pause);
         pause.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -67,6 +67,10 @@ public class AudioPlayer {
             
         });
        
-        
+        return panel;
+    
+    }
+    public static void main(String[] args) {
+
     }
 }
