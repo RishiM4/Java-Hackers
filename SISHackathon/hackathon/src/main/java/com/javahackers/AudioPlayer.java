@@ -30,8 +30,7 @@ public class AudioPlayer {
         JButton pause = new JButton("Play");
         JButton play = new JButton("Play");
         panel.setLayout(null);
-        pause.setBounds(100,100,100,100);
-        pause.setBounds(100,210,100,100);
+        pause.setBounds(100,50,100,100);
         panel.add(play);
         panel.add(pause);
         pause.addActionListener(new ActionListener() {

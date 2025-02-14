@@ -113,8 +113,8 @@ public class MouseMacro implements NativeMouseInputListener, NativeKeyListener{
         panel.setSize(400,400);
         panel.setVisible(true);
         panel.setLayout(null);
-        JToggleButton toggleButton = new JToggleButton();
-        toggleButton.setBounds(100,100,150,100);
+        JToggleButton toggleButton = new JToggleButton("Click Here To Record a Macro");
+        toggleButton.setBounds(100,100,250,100);
         panel.add(toggleButton);
         toggleButton.addActionListener(new ActionListener() {
 

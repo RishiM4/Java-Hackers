@@ -125,6 +125,7 @@ public class FinanceManager {
                             budg = Integer.parseInt(budget.getText());
                         } catch (Exception f) {
                             JOptionPane.showMessageDialog(frame, "Please enter a Integer without a currency sign    ", "error", 0);
+                            System.err.println(budget.getText());
                            return;
                         }
                         deposit.setBounds(500,225, 250,300);
