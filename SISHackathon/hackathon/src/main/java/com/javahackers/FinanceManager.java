@@ -1,6 +1,5 @@
 package com.javahackers;
 
-import java.util.Scanner;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

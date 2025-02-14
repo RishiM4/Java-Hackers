@@ -1,5 +1,6 @@
 package com.javahackers;
 
+import java.awt.Font;
 import java.awt.Robot;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,6 +8,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -49,11 +51,11 @@ public class AutoClicker implements NativeKeyListener{
         panel.setVisible(true);
         panel.setSize(400,400);
         JButton button = new JButton();
-        panel.setLayout(null);
-        button.setBounds(100,100,100,50);
+        
+        button.setBounds(100,100,150,50);
         button.setText("Start Autoclicker");
-        JTextField textField = new JTextField();
-        textField.setBounds(100,200,100,50);
+        JTextField textField = new JTextField("Delay");
+        textField.setBounds(100,200,150,50);
         panel.add(textField);
         panel.add(button);
         button.addActionListener(new ActionListener() {
@@ -95,15 +97,22 @@ public class AutoClicker implements NativeKeyListener{
     }
     public static void main(String[] args) {
         JFrame frame = new JFrame();
+        frame.setLayout(null);
+        Font font = new Font("Serif",Font.PLAIN,30);
+        JLabel label = new JLabel("Auto Clicker");
+        label.setFont(font);
+        label.setBounds(100,25,200,25);
         frame.setVisible(true);
+        frame.add(label);
         frame.setSize(400,400);
         JButton button = new JButton();
-        frame.setLayout(null);
-        button.setBounds(100,100,100,50);
+        
+        button.setBounds(100,100,150,50);
         button.setText("Start Autoclicker");
-        JTextField textField = new JTextField();
-        textField.setBounds(100,200,100,50);
+        JTextField textField = new JTextField("                Delay");
+        textField.setBounds(100,200,150,50);
         frame.add(textField);
+        
         frame.add(button);
         button.addActionListener(new ActionListener() {
             @Override

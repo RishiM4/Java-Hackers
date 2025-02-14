@@ -1,6 +1,5 @@
 package com.javahackers;
 
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -11,13 +10,14 @@ import javax.swing.JPanel;
 
 public class Gaming {
     static JPanel currentPanel = new JPanel();
-    static JFrame frame = new JFrame();
+    static JFrame frame = new JFrame("Gaming Tools - By Rishi Mohan");
 
     public static void main(String[] args) {
         AutoClicker autoClicker = new AutoClicker(); 
         KeyBoardMacro keyBoardMacro = new KeyBoardMacro();
         AudioPlayer audioplayer = new AudioPlayer();
         MouseMacro mousemacro = new MouseMacro();
+        SystemStats systemstats = new SystemStats();
         currentPanel = new JPanel();
         frame.setSize(500,500);
         frame.setVisible(true);
@@ -26,12 +26,14 @@ public class Gaming {
         JMenu keyBoardScript = new JMenu("Keyboard Scripts");
         JMenu audioPlayer = new JMenu("Audio Player");
         JMenu mouseMacro = new JMenu("Mouse Macro");
+        JMenu systemStats = new JMenu("System Stats");
         JPanel audioPanel = audioplayer.createPanel();
         
         menuBar.add(autoclicker);
         menuBar.add(keyBoardScript);
         menuBar.add(audioPlayer);
         menuBar.add(mouseMacro);
+        menuBar.add(systemStats);
         autoclicker.addMouseListener(new MouseListener() {
 
             @Override
@@ -46,8 +48,8 @@ public class Gaming {
                 frame.remove(currentPanel);
                 currentPanel = autoClicker.createPanel();
                 frame.add(currentPanel);
-                frame.setSize(399,399);
-                frame.setSize(400,400);
+                frame.setSize(499,499);
+                frame.setSize(500,500);
 
             }
             @Override
@@ -71,8 +73,8 @@ public class Gaming {
                 frame.remove(currentPanel);
                 currentPanel = keyBoardMacro.createPanel();
                 frame.add(currentPanel);
-                frame.setSize(399,399);
-                frame.setSize(400,400);
+                frame.setSize(499,499);
+                frame.setSize(500,500);
     
             }
 
@@ -98,8 +100,8 @@ public class Gaming {
                 frame.remove(currentPanel);
                 currentPanel = audioPanel;
                 frame.add(currentPanel);
-                frame.setSize(399,399);
-                frame.setSize(400,400);
+                frame.setSize(499,499);
+                frame.setSize(500,500);
     
             }
 
@@ -125,10 +127,38 @@ public class Gaming {
                 frame.remove(currentPanel);
                 currentPanel = mousemacro.createPanel();
                 frame.add(currentPanel);
-                frame.setSize(399,399);
-                frame.setSize(400,400);
+                frame.setSize(499,499);
+                frame.setSize(500,500);
             }
 
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+            
+        });
+        systemStats.addMouseListener(new MouseListener() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                frame.remove(currentPanel);
+                currentPanel = systemstats.createPanel();
+                frame.add(currentPanel);
+                frame.setSize(499,499);
+                frame.setSize(500,500);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
 
             @Override
             public void mouseReleased(MouseEvent e) {

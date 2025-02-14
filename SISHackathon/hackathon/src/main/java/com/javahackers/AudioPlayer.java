@@ -1,19 +1,11 @@
 package com.javahackers;
 
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
-import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.LineUnavailableException;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -28,14 +20,14 @@ public class AudioPlayer {
         try {
             AudioInputStream audioInputStream =  AudioSystem.getAudioInputStream(new File("C:\\Users\\Rishi (New)\\Downloads\\sound\\crab rave.wav").getAbsoluteFile()); 
             clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
+            //clip.open(audioInputStream);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
             
             
         }
         catch (Exception e) {
         }
-        JButton pause = new JButton("Pause");
+        JButton pause = new JButton("Play");
         JButton play = new JButton("Play");
         panel.setLayout(null);
         pause.setBounds(100,100,100,100);
