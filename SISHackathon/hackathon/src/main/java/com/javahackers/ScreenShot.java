@@ -1,6 +1,5 @@
 package com.javahackers;
 
-import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Robot;
@@ -10,7 +9,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 

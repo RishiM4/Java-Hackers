@@ -33,7 +33,7 @@ public class MouseMacro implements NativeMouseInputListener, NativeKeyListener{
     public void nativeMousePressed(NativeMouseEvent e) {
         System.err.println(e.getButton());
         
-        if (false) {
+        if (true) {
             time.add(System.currentTimeMillis());
             button.add(e.getButton());
             type.add("pressed");
