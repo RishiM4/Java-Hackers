@@ -41,6 +41,7 @@ public class FinanceManager {
             public void actionPerformed(ActionEvent e) {
                 temp = deposit.getText();
                 stuffie.setText(stuffie.getText()+"\n"+temp + ", ");
+                deposit.setText("");
             }
         });
         JButton button2 = new JButton();
