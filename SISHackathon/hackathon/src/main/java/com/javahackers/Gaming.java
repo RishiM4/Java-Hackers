@@ -1,5 +1,6 @@
 package com.javahackers;
 
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -16,6 +17,7 @@ public class Gaming {
         AutoClicker autoClicker = new AutoClicker(); 
         KeyBoardMacro keyBoardMacro = new KeyBoardMacro();
         AudioPlayer audioplayer = new AudioPlayer();
+        MouseMacro mousemacro = new MouseMacro();
         currentPanel = new JPanel();
         frame.setSize(500,500);
         frame.setVisible(true);
@@ -23,12 +25,13 @@ public class Gaming {
         JMenu autoclicker = new JMenu("Autoclicker");
         JMenu keyBoardScript = new JMenu("Keyboard Scripts");
         JMenu audioPlayer = new JMenu("Audio Player");
-        
+        JMenu mouseMacro = new JMenu("Mouse Macro");
         JPanel audioPanel = audioplayer.createPanel();
         
         menuBar.add(autoclicker);
         menuBar.add(keyBoardScript);
         menuBar.add(audioPlayer);
+        menuBar.add(mouseMacro);
         autoclicker.addMouseListener(new MouseListener() {
 
             @Override
@@ -108,6 +111,36 @@ public class Gaming {
 
             @Override
             public void mouseExited(MouseEvent e) {}
+            
+        });
+        mouseMacro.addMouseListener(new MouseListener() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                frame.remove(currentPanel);
+                currentPanel = mousemacro.createPanel();
+                frame.add(currentPanel);
+                frame.setSize(399,399);
+                frame.setSize(400,400);
+            }
+
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
             
         });
         frame.setJMenuBar(menuBar);
