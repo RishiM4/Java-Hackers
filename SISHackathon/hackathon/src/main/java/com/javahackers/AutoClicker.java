@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.github.kwhat.jnativehook.GlobalScreen;
@@ -43,6 +44,55 @@ public class AutoClicker implements NativeKeyListener{
 	}
     public void nativeKeyTyped(NativeKeyEvent e) {
 	}
+    public JPanel createPanel(){
+        JPanel panel = new JPanel();
+        panel.setVisible(true);
+        panel.setSize(400,400);
+        JButton button = new JButton();
+        panel.setLayout(null);
+        button.setBounds(100,100,100,50);
+        button.setText("Start Autoclicker");
+        JTextField textField = new JTextField();
+        textField.setBounds(100,200,100,50);
+        panel.add(textField);
+        panel.add(button);
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                toggle = true;
+                click();
+            }
+            
+        });
+        textField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int temp = Integer.parseInt(textField.getText());
+                    delay = temp;
+                    if (delay < 50) {
+                        delay = 50;
+                    }
+                    else if (delay > 1000) {
+                        delay = 1000;
+                    }
+                    System.out.println(delay);
+                } catch (Exception f) {
+                    JOptionPane.showMessageDialog(panel, "Please enter an Integer", "error", 1);
+                }
+            }
+            
+        });
+        try {
+            GlobalScreen.registerNativeHook();
+        } catch (Exception e) {
+        }
+        GlobalScreen.addNativeKeyListener(new AutoClicker());
+        panel.setSize(399,399);
+        panel.setSize(400,400);
+
+        return panel;
+    }
     public static void main(String[] args) {
         JFrame frame = new JFrame();
         frame.setVisible(true);

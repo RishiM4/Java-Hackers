@@ -6,6 +6,7 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -24,10 +25,7 @@ public class KeyBoardMacro implements NativeKeyListener{
     static boolean activeMacro = false;
     public void nativeKeyPressed(NativeKeyEvent e){
         if(e.getKeyCode()==3667) {
-            if(!activeMacro) {
-                startMacro();
-                activeMacro = true;
-            }
+            startMacro();
         }
         
     }
@@ -65,15 +63,16 @@ public class KeyBoardMacro implements NativeKeyListener{
         }
         activeMacro = false;
     }
-    public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        frame.setSize(400,400);
-        frame.setVisible(true);
+    public JPanel createPanel(){
+        JPanel panel = new JPanel();
+        panel.setSize(400,400);
+        panel.setVisible(true);
         JToggleButton toggle = new JToggleButton();
-        toggle.setBounds(100,100,50,50);
-        frame.setLayout(null);
-        frame.add(toggle);
-        frame.addKeyListener(new KeyListener() {
+        toggle.setText("Click here to record macro!");
+        toggle.setBounds(100,100,200,50);
+        panel.setLayout(null);
+        panel.add(toggle);
+        panel.addKeyListener(new KeyListener() {
 
             @Override
             public void keyTyped(KeyEvent e) {
@@ -114,7 +113,7 @@ public class KeyBoardMacro implements NativeKeyListener{
                     toggleListener = true;
                     initialTime = System.currentTimeMillis();
                 }
-                frame.requestFocus();
+                panel.requestFocus();
             }
             
         });
@@ -123,7 +122,15 @@ public class KeyBoardMacro implements NativeKeyListener{
         } catch (Exception e) {
         }
         GlobalScreen.addNativeKeyListener(new KeyBoardMacro());
-        while(true) {
-        }
+        return panel;
+    }
+    public static void main(String[] args) {
+        JFrame frame = new JFrame();
+        KeyBoardMacro macro = new KeyBoardMacro();
+
+        frame.setSize(400,400);
+        frame.add(macro.createPanel());
+        frame.setVisible(true);
+        
     }
 }
