@@ -18,7 +18,9 @@ public class Gaming implements NativeKeyListener{
     static AudioPlayer audioplayer = new AudioPlayer();
     static MouseMacro mousemacro = new MouseMacro();
     static SystemStats systemstats = new SystemStats();
+    static ScreenRecorder screenrecorder = new ScreenRecorder();
     static JPanel currentPanel = new JPanel();
+    static ScreenShot screenShot = new ScreenShot();
     static JFrame frame = new JFrame("Gaming Tools - By Rishi Mohan");
     static int panelNumber = -1;
     public void nativeKeyPressed(NativeKeyEvent e){
@@ -43,9 +45,11 @@ public class Gaming implements NativeKeyListener{
         JMenu audioPlayer = new JMenu("Audio Player");
         JMenu mouseMacro = new JMenu("Mouse Macro");
         JMenu systemStats = new JMenu("System Stats");
+        JMenu screenRecorder = new JMenu("Screen Recorder");
         JPanel audioPanel = audioplayer.createPanel();
         JPanel keyboardPanel = keyBoardMacro.createPanel();
         JPanel mousePanel = mousemacro.createPanel();
+        JMenu screenshot = new JMenu("Screen Shot");
         
 
 
@@ -54,6 +58,8 @@ public class Gaming implements NativeKeyListener{
         menuBar.add(audioPlayer);
         menuBar.add(mouseMacro);
         menuBar.add(systemStats);
+        menuBar.add(screenRecorder);
+        menuBar.add(screenshot);
         autoclicker.addMouseListener(new MouseListener() {
 
             @Override
@@ -68,8 +74,8 @@ public class Gaming implements NativeKeyListener{
                 frame.remove(currentPanel);
                 currentPanel = autoClicker.createPanel();
                 frame.add(currentPanel);
-                frame.setSize(499,499);
-                frame.setSize(500,500);
+                frame.setSize(799,499);
+                frame.setSize(800,500);
                 panelNumber = 0;
 
             }
@@ -94,8 +100,8 @@ public class Gaming implements NativeKeyListener{
                 frame.remove(currentPanel);
                 currentPanel = keyboardPanel;
                 frame.add(currentPanel);
-                frame.setSize(499,499);
-                frame.setSize(500,500);
+                frame.setSize(799,499);
+                frame.setSize(800,500);
                 panelNumber = 1;
     
             }
@@ -122,8 +128,8 @@ public class Gaming implements NativeKeyListener{
                 frame.remove(currentPanel);
                 currentPanel = audioPanel;
                 frame.add(currentPanel);
-                frame.setSize(499,499);
-                frame.setSize(500,500);
+                frame.setSize(799,499);
+                frame.setSize(800,500);
                 panelNumber = 2;
     
             }
@@ -150,8 +156,8 @@ public class Gaming implements NativeKeyListener{
                 frame.remove(currentPanel);
                 currentPanel = mousePanel;
                 frame.add(currentPanel);
-                frame.setSize(499,499);
-                frame.setSize(500,500);
+                frame.setSize(799,499);
+                frame.setSize(800,500);
                 panelNumber = 3;
             }
 
@@ -176,13 +182,72 @@ public class Gaming implements NativeKeyListener{
                 frame.remove(currentPanel);
                 currentPanel = systemstats.createPanel();
                 frame.add(currentPanel);
-                frame.setSize(499,499);
-                frame.setSize(500,500);
+                frame.setSize(799,499);
+                frame.setSize(800,500);
                 panelNumber = 4;
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+            
+        });
+        screenRecorder.addMouseListener(new MouseListener() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                frame.remove(currentPanel);
+                currentPanel = screenrecorder.createPanel();
+                frame.add(currentPanel);
+                frame.setSize(799,499);
+                frame.setSize(800,500);
+                panelNumber = 5;
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+            
+        });
+        screenshot.addMouseListener(new MouseListener() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                frame.remove(currentPanel);
+                currentPanel = screenShot.createPanel();
+                frame.add(currentPanel);
+                frame.setSize(799,499);
+                frame.setSize(800,500);
+                panelNumber = 5;
             }
 
             @Override

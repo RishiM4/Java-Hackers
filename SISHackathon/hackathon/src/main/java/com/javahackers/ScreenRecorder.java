@@ -1,69 +1,136 @@
 package com.javahackers;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.*;
-import java.io.*;
+
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class ScreenRecorder {
-
-    private static Robot robot;
-    private static Rectangle screenRect;
-    private static BufferedImage screenImage;
-    private static String outputFilePath = "output.mp4"; // Change path to your preferred location
-    private static Process ffmpegProcess;
-
-    public static void main(String[] args) throws AWTException, IOException {
-        robot = new Robot();
-        screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
-
-        // Start the FFmpeg process
-        startFFmpegRecording();
-
-        // Set up GUI
-        JFrame frame = new JFrame("Screen Recorder");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(300, 100);
-        frame.setLocationRelativeTo(null);
-
-        JButton startButton = new JButton("Start Recording");
-        startButton.addActionListener(e -> startRecording());
-        frame.getContentPane().add(startButton, BorderLayout.CENTER);
-
-        frame.setVisible(true);
-    }
-
-    private static void startFFmpegRecording() {
-        // FFmpeg command for screen recording
-        String ffmpegCommand = "ffmpeg -y -f rawvideo -vcodec rawvideo -pix_fmt rgb24 -s " + screenRect.width + "x" + screenRect.height +
-                " -r 30 -i - -an -vcodec libx264 -pix_fmt yuv420p -preset fast -crf 22 " + outputFilePath;
-
+    static Timer timer = new Timer();
+    static TimerTask task;
+    static Boolean isRecording = false;
+    static int frameCount = 0;
+    private static void capture() {
         try {
-            ffmpegProcess = new ProcessBuilder("cmd", "/c", ffmpegCommand).start();
-            OutputStream ffmpegInputStream = ffmpegProcess.getOutputStream();
-            BufferedImage img;
-            byte[] imageData;
-            int[] pixels;
-            while (true) {
-                img = robot.createScreenCapture(screenRect);
-                imageData = ((DataBufferByte) img.getRaster().getDataBuffer()).getData();
-                ffmpegInputStream.write(imageData);
-                ffmpegInputStream.flush();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+            Robot robot = new Robot();
+            Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
+            
+            int captureInterval = 100;
+            timer = new Timer();
+        
+            task = new TimerTask() {
+            @Override
+            public void run() {
+                if (!isRecording) {
+                    return;
+                }
+                try {
+                    BufferedImage screenFullImage = robot.createScreenCapture(screenRect);
+                    File file = new File("video\\screenshot" +frameCount+ ".png");
+                    ImageIO.write(screenFullImage, "png", file);
+                    frameCount++;
+                    Thread.sleep(captureInterval);
+                } catch (Exception e) {
+                    
+                }
+                
+
+                }
+            };
+            timer.scheduleAtFixedRate(task, 100, 1); 
+        } catch (Exception e) {
+            System.err.println(e);
         }
     }
+    public JPanel createPanel() {
+        JPanel panel = new JPanel();
+        panel.setSize(600,500);
+        panel.setVisible(true);
+        panel.setLayout(null);
+        JButton button = new JButton("Click to capture video");
+        JButton stopRecording = new JButton("Click to stop recording");
+        button.setBounds(200,100,200,100);
+        stopRecording.setBounds(200,200,200,100);
+        panel.add(button);
+        panel.add(stopRecording);
+        button.addActionListener(new ActionListener() {
 
-    private static void startRecording() {
-        // Start recording the screen
-        new Thread(() -> {
-            try {
-                startFFmpegRecording();
-            } catch (Exception e) {
-                e.printStackTrace();
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.err.println("HI");
+                if (!isRecording) {
+                    button.setText("Recording");
+                    isRecording = true;
+                    capture();
+                    
+                }
+                else {
+                    button.setText("Click to capture video");
+                }
+                
             }
-        }).start();
+            
+        });
+        stopRecording.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                isRecording = false;
+            }
+            
+        });
+
+        return panel;
+    }
+    public static void main(String[] args) {
+        JFrame panel = new JFrame();
+        panel.setSize(600,500);
+        panel.setVisible(true);
+        panel.setLayout(null);
+        JButton button = new JButton("Click to capture video");
+        JButton stopRecording = new JButton("Click to stop recording");
+        button.setBounds(200,100,200,100);
+        stopRecording.setBounds(200,200,200,100);
+        panel.add(button);
+        panel.add(stopRecording);
+        button.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.err.println("HI");
+                if (!isRecording) {
+                    button.setText("Recording");
+                    isRecording = true;
+                    capture();
+                    
+                }
+                else {
+                    button.setText("Click to capture video");
+                }
+                
+            }
+            
+        });
+        stopRecording.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                isRecording = false;
+            }
+            
+        });
+
+        
     }
 }
+
