@@ -1,69 +1,70 @@
 package com.javahackers;
 
-import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import com.github.kwhat.jnativehook.GlobalScreen;
-import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
-import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
-
-public class ScreenShot implements NativeKeyListener{
-    
-    static JPanel panel = new JPanel();
-    public void nativeKeyPressed(NativeKeyEvent e){
-        if (e.getKeyCode()==3667) {
-            takePicture();
-        }
-    }
-    private static void takePicture() {
+public class ScreenShot {
+    private static void capture() {
         try {
             Robot robot = new Robot();
-            Rectangle rect = new Rectangle(0,0,500,500);
-            Image image = robot.createScreenCapture(rect);
-            BufferedImage Image = robot.createScreenCapture(rect);
-
-            ImageIcon icon = new ImageIcon(image);
-            JLabel label = new JLabel();
-            label.setIcon(icon);
-            panel.setBounds(0,0,500,500);
-            panel.setVisible(true);
-            panel.add(label);
-            File file = new File("wasddd" + "." + "png");
+            Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
+            int frameCount = 0;
+            int captureInterval = 100;
             
-            try {
-                ImageIO.write(Image, ".png", file);  // ignore returned boolean
-            } catch(IOException e) {
-                System.out.println("Write error for " + file.getPath() +": " + e.getMessage());
+            while (frameCount < 10) { 
+                BufferedImage screenFullImage = robot.createScreenCapture(screenRect);
+                File file = new File("screenshot" +frameCount+ ".png");
+                ImageIO.write(screenFullImage, "png", file);
+                frameCount++;
+                Thread.sleep(captureInterval);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println(e);
         }
     }
-    public static JPanel createPanel(){
-        try {
-            GlobalScreen.registerNativeHook();
-        } catch (Exception e) {
-        }
-        GlobalScreen.addNativeKeyListener(new ScreenShot());
-        
+    public JPanel createPanel() {
+        JPanel panel = new JPanel();
+        panel.setSize(600,500);
         panel.setVisible(true);
-        panel.setSize(400,400);
+        panel.setLayout(null);
+        JButton button = new JButton("Click to capture images");
+        button.setBounds(200,100,200,100);
+        panel.add(button);
+        button.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                capture();
+            }
+            
+        });
         return panel;
     }
     public static void main(String[] args) {
-        createPanel();
-        while(true) {
+        JFrame panel = new JFrame();
+        panel.setSize(500,500);
+        panel.setVisible(true);
+        panel.setLayout(null);
+        JButton button = new JButton("Click to capture images");
+        button.setBounds(100,100,100,100);
+        panel.add(button);
+        button.addActionListener(new ActionListener() {
 
-        }
-        
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                capture();
+            }
+            
+        });
     }
 }
+
