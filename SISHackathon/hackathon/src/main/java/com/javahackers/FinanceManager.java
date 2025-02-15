@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
@@ -36,8 +37,8 @@ public class FinanceManager {
         frame.setVisible(true);
         frame.setLayout(null);
         JTextField deposit = new JTextField();
-        deposit.setBounds(500,225, 250,300);
-        deposit.setToolTipText("Type Transaction/Deposit Log Entry Here.");
+        deposit.setBounds(500,225, 500,300);
+        deposit.setToolTipText("Type Budget Limit/Transaction Log Entry Here.");
         frame.add(deposit);
         JLabel stuffie = new JLabel();
         stuffie.setBounds(0, 0, 1, 1);
@@ -49,14 +50,6 @@ public class FinanceManager {
                 stuffie.setText(stuffie.getText()+"\n"+temp);
             } 
         });
-        JTextField budget = new JTextField();
-        budget.setBounds(750, 225, 250, 300);
-        budget.setToolTipText("Type Budget Limit Here. Please Also Adhere To Your Set Limit.");
-        frame.add(budget);
-        try {
-            budg = Integer.parseInt(budget.getText());
-        } catch (Exception e) {
-        }
         JLabel budgetladel = new JLabel();
         budgetladel.setText("Your Budget For Today Is : $ __");
         budgetladel.setBounds(100, 76, 300, 100);
@@ -75,7 +68,7 @@ public class FinanceManager {
         
                 JButton button = new JButton();
                 button.setBounds(10, 225, 490,100);
-                button.setText("Click to add record of Transaction/Deposit");
+                button.setText("1. Click to add record of Transaction/Deposit");
                 frame.add(button);
                 button.addActionListener(new ActionListener() {
                     @Override
@@ -87,47 +80,44 @@ public class FinanceManager {
                 });
                 JButton button2 = new JButton();
                 button2.setBounds(1000, 225, 490,100);
-                button2.setText("Click to see History of Transactions/Deposits");
+                button2.setText("4. Click to see History of Transactions/Deposits");
                 frame.add(button2);
                 button2.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         temp = deposit.getText();
-                        stuffie.setBounds(500, 0, 500, 780);
+                        stuffie.setBounds(500, 225, 500, 300);
                         Border border = BorderFactory.createBevelBorder(0,Color.BLACK,Color.GRAY);
                         stuffie.setBorder(border);
-                        budget.setBounds(0,0, 1,1);
                         deposit.setBounds(0,0, 1,1);
                     };
                 });
                 JButton button3 = new JButton();
                 button3.setBounds(1000, 325, 490,100);
-                button3.setText("Click to add record of Transaction/Deposit again");
+                button3.setText("5. Back to Main Screen");
                 frame.add(button3);
                 button3.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         temp = deposit.getText();
                         stuffie.setBounds(0, 0, 1, 1);
-                        deposit.setBounds(500,225, 250,300);
-                        budget.setBounds(750, 225, 250, 300);
+                        deposit.setBounds(500,225, 500,300);
                     };
                 });
             
                 JButton button4 = new JButton();
                 button4.setBounds(10, 325, 490,100);
-                button4.setText("Click to create/change budget limit");
+                button4.setText("2. Click to create/change budget limit");
                 frame.add(button4);
                 button4.addActionListener(new ActionListener() {
-                    @Override
+                    
                     public void actionPerformed(ActionEvent e) {
                         try {
-                            budg = Integer.parseInt(budget.getText());
+                            budg = Integer.parseInt(deposit.getText());
                         } catch (Exception f) {
                             JOptionPane.showMessageDialog(frame, "Please enter a Integer without a currency sign    ", "error", 0);
                            return;
                         }
-                        deposit.setBounds(500,225, 250,300);
-                        budget.setBounds(750, 225, 250, 300);
+                        deposit.setBounds(500,225, 500,300);
                         budgetladel.setText("");
                         budgetladel.setText("Your Budget For Today Is : $" + budg);
                         frame.setSize(399,399);
@@ -136,10 +126,9 @@ public class FinanceManager {
                 });
                 JButton button5 = new JButton();
                 button5.setBounds(10, 425, 490,100);
-                button5.setText("Click to clear your Deposit/Transaction History");
+                button5.setText("3. Click to clear your Deposit/Transaction History");
                 frame.add(button5);
                 button5.addActionListener(new ActionListener() {
-                    @Override
                     public void actionPerformed(ActionEvent e) {
                         stuffie.setText("");
                     };
@@ -170,12 +159,12 @@ public class FinanceManager {
                 frame.add(moneys6);
                 JButton button6 = new JButton();
                 button6.setBounds(1000, 425, 490,100);
-                button6.setText("Click to convert your budget to a different currency");
+                button6.setText("6. Click to convert your budget to a different currency");
                 frame.add(button6);
                 button6.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         try {
-                            budg = Integer.parseInt(budget.getText());
+                            budg = Integer.parseInt(deposit.getText());
                         } catch (Exception f) {
                             f.printStackTrace();
                         }
@@ -199,6 +188,15 @@ public class FinanceManager {
                         moneys6.setFont(new Font("Serif", Font.PLAIN,14));
                         frame.setSize(399,399);
                         frame.setSize(frame.getMaximumSize());
+                    };
+                });
+                JButton button7 = new JButton();
+                button7.setBounds(100, 595, 100,100);
+                button7.setText("HELP");
+                frame.add(button7);
+                button7.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        JOptionPane.showMessageDialog(frame, "1) Enter your purchase along with the date and cost to log it.\n2)Type in a number to set it as your budget.\n3) Click to clear all transaction data.\n4) Click to see purchase history.\n5) Go back to original screen.\n6) See your budget in various currencies.", "Help", 0);
                     };
                 });
 
