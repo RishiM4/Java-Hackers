@@ -5,6 +5,8 @@ import java.awt.Robot;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,25 +22,36 @@ import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
 public class AutoClicker implements NativeKeyListener{
     static Boolean toggle = false;
     static int delay = 1000;
+    static Timer timer = new Timer();
+    static TimerTask task;
     private static void click() {
-        while(toggle) {
-            if (!toggle) {
-                return;
+        timer = new Timer();
+        
+        task = new TimerTask() {
+            @Override
+            public void run() {
+                try {
+                
+                    Robot robot = new Robot();
+    
+                    robot.mouseRelease(MouseEvent.BUTTON1_DOWN_MASK);
+                    int k = delay;
+                    Thread.sleep(k);
+                    robot.mousePress(MouseEvent.BUTTON1_DOWN_MASK);
+                } catch (Exception e) {
+                }
+                if(!toggle) {
+                    timer.cancel();
+                    return;
+                }
             }
-            try {
-                Robot robot = new Robot();
-
-                robot.mouseRelease(MouseEvent.BUTTON1_DOWN_MASK);
-                int k = delay;
-                Thread.sleep(k);
-                robot.mousePress(MouseEvent.BUTTON1_DOWN_MASK);
-            } catch (Exception e) {
-            }
-        }
+        };
+        timer.scheduleAtFixedRate(task, delay, 1); 
+        
+        
+        
     }
-    public void stop() {
-        System.exit(0);
-    }
+    
     
     public void nativeKeyPressed(NativeKeyEvent e) {
 
@@ -59,10 +72,21 @@ public class AutoClicker implements NativeKeyListener{
         
         button.setBounds(100,100,150,50);
         button.setText("Start Autoclicker");
+        JButton stop = new JButton("Stop Autoclicker");
+        stop.setBounds(100,150,150,50);
         JTextField textField = new JTextField("Delay");
         textField.setBounds(100,200,150,50);
         panel.add(textField);
         panel.add(button);
+        panel.add(stop);
+        stop.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                toggle = false;
+            }
+            
+        });
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
