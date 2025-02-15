@@ -36,7 +36,12 @@ public class AutoClicker implements NativeKeyListener{
             }
         }
     }
+    public void stop() {
+        System.exit(0);
+    }
+    
     public void nativeKeyPressed(NativeKeyEvent e) {
+
         System.err.println(e.getKeyCode());
         if (e.getKeyCode() == 3667) {
             toggle = false;

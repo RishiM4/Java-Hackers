@@ -4,8 +4,10 @@ import java.awt.Robot;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
@@ -19,7 +21,7 @@ import com.github.kwhat.jnativehook.mouse.NativeMouseInputListener;
 public class MouseMacro implements NativeMouseInputListener, NativeKeyListener{
     
     static ArrayList<Long> time = new ArrayList<Long>();
-    static ArrayList<Integer> button = new ArrayList<Integer>();
+    static ArrayList<Integer> buttonType = new ArrayList<Integer>();
     static ArrayList<Integer> mouseX = new ArrayList<Integer>();
     static ArrayList<Integer> mouseY = new ArrayList<Integer>();
     static ArrayList<String> type = new ArrayList<String>();
@@ -35,7 +37,7 @@ public class MouseMacro implements NativeMouseInputListener, NativeKeyListener{
         
         if (true) {
             time.add(System.currentTimeMillis());
-            button.add(e.getButton());
+            buttonType.add(e.getButton());
             type.add("pressed");
             mouseX.add(e.getX());
             mouseY.add(e.getY());
@@ -45,7 +47,7 @@ public class MouseMacro implements NativeMouseInputListener, NativeKeyListener{
     public void nativeMouseDragged(NativeMouseEvent e) {
         if (toggle) {
             time.add(System.currentTimeMillis());
-            button.add(e.getButton());
+            buttonType.add(e.getButton());
             type.add("pressed");
             mouseX.add(e.getX());
             mouseY.add(e.getY());
@@ -56,7 +58,7 @@ public class MouseMacro implements NativeMouseInputListener, NativeKeyListener{
     public void nativeMouseReleased(NativeMouseEvent e) {
         if (toggle) {
             time.add(System.currentTimeMillis());
-            button.add(e.getButton());
+            buttonType.add(e.getButton());
             type.add("released");
             mouseX.add(e.getX());
             mouseY.add(e.getY());
@@ -75,7 +77,7 @@ public class MouseMacro implements NativeMouseInputListener, NativeKeyListener{
                 else {
                     Thread.sleep(time.get(k)-time.get(k-1));
                     if (type.get(k).equals("pressed")) {
-                        if (button.get(k).equals(1)) {
+                        if (buttonType.get(k).equals(1)) {
                             robot.mouseMove(mouseX.get(k), mouseY.get(k));
                             robot.mousePress(MouseEvent.BUTTON1_DOWN_MASK);
                             
@@ -87,7 +89,7 @@ public class MouseMacro implements NativeMouseInputListener, NativeKeyListener{
                         }
                     }
                     else if (type.get(k).equals("released")) {
-                        if (button.get(k).equals(1)) {
+                        if (buttonType.get(k).equals(1)) {
                             robot.mouseMove(mouseX.get(k), mouseY.get(k));
                             robot.mouseRelease(MouseEvent.BUTTON1_DOWN_MASK);
                             
@@ -113,9 +115,61 @@ public class MouseMacro implements NativeMouseInputListener, NativeKeyListener{
         panel.setSize(400,400);
         panel.setVisible(true);
         panel.setLayout(null);
-        JToggleButton toggleButton = new JToggleButton("Click Here To Record a Macro");
-        toggleButton.setBounds(100,100,250,100);
+        JToggleButton toggleButton = new JToggleButton("Click record mouse macro");
+        JButton button = new JButton("Click to Start Mouse Macro");
+        toggleButton.setBounds(100,100,150,100);
+        button.setBounds(100,210,150,100);
+        panel.add(button);
         panel.add(toggleButton);
+        panel.addMouseListener(new MouseListener() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (true) {
+                    time.add(System.currentTimeMillis());
+                    buttonType.add(1);
+                    
+                    type.add("pressed");
+                    mouseX.add(e.getX());
+                    mouseY.add(e.getY());
+        
+                }
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                if (true) {
+                    time.add(System.currentTimeMillis());
+                    buttonType.add(1);
+                    
+                    type.add("pressed");
+                    mouseX.add(e.getX());
+                    mouseY.add(e.getY());
+        
+                }
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+            
+        });
+        button.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                runScript();
+            }
+            
+        });
         toggleButton.addActionListener(new ActionListener() {
 
             @Override
@@ -147,8 +201,11 @@ public class MouseMacro implements NativeMouseInputListener, NativeKeyListener{
         frame.setSize(400,400);
         frame.setVisible(true);
         frame.setLayout(null);
-        JToggleButton toggleButton = new JToggleButton();
+        JToggleButton toggleButton = new JToggleButton("Click record mouse macro");
+        JButton button = new JButton("Click to Start Mouse Macro");
         toggleButton.setBounds(100,100,150,100);
+        button.setBounds(100,210,150,100);
+        frame.add(button);
         frame.add(toggleButton);
         toggleButton.addActionListener(new ActionListener() {
 

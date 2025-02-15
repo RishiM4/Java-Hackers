@@ -1,10 +1,13 @@
 package com.javahackers;
 
 import java.awt.Robot;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
@@ -67,11 +70,24 @@ public class KeyBoardMacro implements NativeKeyListener{
         JPanel panel = new JPanel();
         panel.setSize(400,400);
         panel.setVisible(true);
-        JToggleButton toggle = new JToggleButton();
-        toggle.setText("Click here to record macro!");
+        JToggleButton toggle = new JToggleButton("Click here to record a macro");
+        JButton button = new JButton("Click here to start the macro");
         toggle.setBounds(100,100,200,50);
+        button.setBounds(100,150,200,50);
         panel.setLayout(null);
         panel.add(toggle);
+        panel.add(button);
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Thread.sleep(2500);
+                } catch (Exception f) {
+                }
+                startMacro();
+            }
+            
+        });
         panel.addKeyListener(new KeyListener() {
 
             @Override
