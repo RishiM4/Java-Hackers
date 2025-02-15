@@ -29,7 +29,7 @@ public class FinanceManager {
     static JLabel moneys4;
     static JLabel moneys5;
     static JLabel moneys6;
-    static JLabel jfj;
+    
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Finance Manager");
@@ -146,24 +146,29 @@ public class FinanceManager {
                         stuffie.setText("");
                     };
                 });
-                 moneys= new JLabel("$ __" + "   =    ___ Won!");
-                moneys.setBounds(410,500, 200, 60);
-                moneys.setText("dfg");
+                moneys= new JLabel("$ __" + "   =    ___ Won!");
+                moneys.setBounds(410,300, 200, 20);
+                moneys.setText("$ __" + "   =    ___ Won!");
                 frame.add(moneys);
-                 moneys2= new JLabel("$ __" + "   =    ___ Rupees!");
-                moneys.setBounds(410,560, 1200, 60);
+                moneys2= new JLabel("$ __" + "   =    ___ Rupees!");
+                moneys2.setText("$ __" + "   =    ___ Rupees!");
+                moneys.setBounds(410,320, 200, 20);
                 frame.add(moneys2);
                  moneys3= new JLabel("$ __" + "   =    ___ Euros!");
-                moneys.setBounds(410,620, 1200, 60);
+                moneys.setBounds(410,420, 200, 60);
+                moneys3.setText("$ __" + "   =    ___ Euros!");
                 frame.add(moneys3);
                  moneys4= new JLabel("$ __" + "   =    ___ Yen!");
-                moneys.setBounds(410,680, 1200, 60);
+                 moneys4.setText("$ __" + "   =    ___ Yen!");
+                moneys.setBounds(410,480, 200, 60);
                 frame.add(moneys4);
                  moneys5= new JLabel("$ __" + "   =    ___ Dirhams!");
-                moneys.setBounds(410,740, 1200, 60);
+                 moneys5.setText("$ __" + "   =    ___ Dirhams!");
+                moneys.setBounds(410,540, 200, 60);
                 frame.add(moneys5);
                  moneys6= new JLabel("$ __" + "   =    ___ Bitcoins!");
-                moneys.setBounds(410,800, 1200, 60);
+                 moneys6.setText("$ __" + "   =    ___ Bitcoins!");
+                moneys.setBounds(410,600, 200, 60);
                 frame.add(moneys6);
                 JButton button6 = new JButton();
                 button6.setBounds(1000, 425, 490,100);
@@ -182,7 +187,7 @@ public class FinanceManager {
                           yen = (budg * 152.53);
                           dirham = (budg * 3.67);
                           bitcoiny = (budg * 0.000010);
-                        moneys.setText("$" + budg + "   =   " + won + " Won!");
+                        //moneys.setText("$" + budg + "   =   " + won + " Won!");
                         moneys.setFont(new Font("Serif", Font.PLAIN,14));
                         moneys2.setText("$" + budg + "   =   "+ rupees + "Rupees!");
                         moneys2.setFont(new Font("Serif", Font.PLAIN,14));

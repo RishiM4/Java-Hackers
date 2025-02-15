@@ -18,7 +18,7 @@ public class AudioPlayer {
         panel.setSize(400,400);
         panel.setVisible(true);
         try {
-            AudioInputStream audioInputStream =  AudioSystem.getAudioInputStream(new File("C:\\Users\\Rishi (New)\\Downloads\\sound\\crab rave.wav").getAbsoluteFile()); 
+            //AudioInputStream audioInputStream =  AudioSystem.getAudioInputStream(new File("C:\\Users\\Rishi (New)\\Downloads\\sound\\crab rave.wav").getAbsoluteFile()); 
             clip = AudioSystem.getClip();
             //clip.open(audioInputStream);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
