@@ -1,8 +1,10 @@
 package com.javahackers;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -21,6 +23,14 @@ public class FinanceManager {
     static double yen = (budg * 152.53);
     static double dirham = (budg * 3.67);
     static double bitcoiny = (budg * 0.000010);
+    static JLabel moneys;
+    static JLabel moneys2;
+    static JLabel moneys3;
+    static JLabel moneys4;
+    static JLabel moneys5;
+    static JLabel moneys6;
+    
+
     public static void main(String[] args) {
         JFrame frame = new JFrame("Finance Manager");
         frame.setSize(frame.getMaximumSize());
@@ -28,6 +38,7 @@ public class FinanceManager {
         frame.setLayout(null);
         JTextField deposit = new JTextField();
         deposit.setBounds(500,225, 250,300);
+        deposit.setToolTipText("Type Transaction/Deposit Log Entry Here.");
         frame.add(deposit);
         JLabel stuffie = new JLabel();
         stuffie.setBounds(0, 0, 1, 1);
@@ -41,12 +52,27 @@ public class FinanceManager {
         });
         JTextField budget = new JTextField();
         budget.setBounds(750, 225, 250, 300);
+        budget.setToolTipText("Type Budget Limit Here. Please Also Adhere To Your Set Limit.");
         frame.add(budget);
         try {
             budg = Integer.parseInt(budget.getText());
         } catch (Exception e) {
         }
         JLabel budgetladel = new JLabel();
+        budgetladel.setText("Your Budget For Today Is : $ __");
+        budgetladel.setBounds(100, 76, 300, 100);
+        frame.add(budgetladel);
+        JLabel d1 = new JLabel();
+        d1.setBounds(420,40,700, 150);
+        d1.setText("Money Budgeting And Tracking App");
+        d1.setFont(new Font("Serif", Font.PLAIN, 45));
+        frame.add(d1);
+        Calendar c = Calendar.getInstance();
+        String time = c.getTime().toString();
+        JLabel timylabel = new JLabel();
+        timylabel.setBounds(1200, 84, 200, 80);
+        timylabel.setText(time);
+        frame.add(timylabel);
         
                 JButton button = new JButton();
                 button.setBounds(10, 225, 490,100);
@@ -83,7 +109,7 @@ public class FinanceManager {
                     public void actionPerformed(ActionEvent e) {
                         temp = deposit.getText();
                         stuffie.setBounds(0, 0, 1, 1);
-                        deposit.setBounds(500,225, 500,300);
+                        deposit.setBounds(500,225, 250,300);
                         budget.setBounds(750, 225, 250, 300);
                     };
                 });
@@ -99,14 +125,13 @@ public class FinanceManager {
                             budg = Integer.parseInt(budget.getText());
                         } catch (Exception f) {
                             JOptionPane.showMessageDialog(frame, "Please enter a Integer without a currency sign    ", "error", 0);
+                            System.err.println(budget.getText());
                            return;
                         }
                         deposit.setBounds(500,225, 250,300);
                         budget.setBounds(750, 225, 250, 300);
-                        budgetladel.setBounds(100, 50, 300, 100);
                         budgetladel.setText("");
                         budgetladel.setText("Your Budget For Today Is : $" + budg);
-                        frame.add(budgetladel);
                         frame.setSize(399,399);
                         frame.setSize(frame.getMaximumSize());
                     };
@@ -121,21 +146,40 @@ public class FinanceManager {
                         stuffie.setText("");
                     };
                 });
-                JLabel moneys= new JLabel("");
-                moneys.setBounds(390, 600, 800, 100);
+                moneys= new JLabel("$ __" + "   =    ___ Won!");
+                moneys.setBounds(410,300, 200, 20);
+                moneys.setText("$ __" + "   =    ___ Won!");
                 frame.add(moneys);
+                moneys2= new JLabel("$ __" + "   =    ___ Rupees!");
+                moneys2.setText("$ __" + "   =    ___ Rupees!");
+                moneys.setBounds(410,320, 200, 20);
+                frame.add(moneys2);
+                 moneys3= new JLabel("$ __" + "   =    ___ Euros!");
+                moneys.setBounds(410,420, 200, 60);
+                moneys3.setText("$ __" + "   =    ___ Euros!");
+                frame.add(moneys3);
+                 moneys4= new JLabel("$ __" + "   =    ___ Yen!");
+                 moneys4.setText("$ __" + "   =    ___ Yen!");
+                moneys.setBounds(410,480, 200, 60);
+                frame.add(moneys4);
+                 moneys5= new JLabel("$ __" + "   =    ___ Dirhams!");
+                 moneys5.setText("$ __" + "   =    ___ Dirhams!");
+                moneys.setBounds(410,540, 200, 60);
+                frame.add(moneys5);
+                 moneys6= new JLabel("$ __" + "   =    ___ Bitcoins!");
+                 moneys6.setText("$ __" + "   =    ___ Bitcoins!");
+                moneys.setBounds(410,600, 200, 60);
+                frame.add(moneys6);
                 JButton button6 = new JButton();
                 button6.setBounds(1000, 425, 490,100);
                 button6.setText("Click to convert your budget to a different currency");
                 frame.add(button6);
                 button6.addActionListener(new ActionListener() {
-                    
-                    @Override
                     public void actionPerformed(ActionEvent e) {
                         try {
                             budg = Integer.parseInt(budget.getText());
                         } catch (Exception f) {
-                            // TODO: handle exception
+                            f.printStackTrace();
                         }
                           won = (budg * 1438.76);
                           rupees = (budg * 86.79);
@@ -143,8 +187,22 @@ public class FinanceManager {
                           yen = (budg * 152.53);
                           dirham = (budg * 3.67);
                           bitcoiny = (budg * 0.000010);
-                        moneys.setText("$" + budg + " = " + won + " won, \n" + rupees + "rupees, \n" + euro + "euros, \n" + yen + "yen, \n" + dirham + "Dirhams, & \n" + bitcoiny + "bitcoins!");
-                       
+                        //moneys.setText("$" + budg + "   =   " + won + " Won!");
+                        moneys.setFont(new Font("Serif", Font.PLAIN,14));
+                        moneys2.setText("$" + budg + "   =   "+ rupees + "Rupees!");
+                        moneys2.setFont(new Font("Serif", Font.PLAIN,14));
+                        moneys3.setText("$" + budg + "   =   " + euro + "Euros!");
+                        moneys3.setFont(new Font("Serif", Font.PLAIN,14));
+                        moneys4.setText("$" + budg + "   =   " + yen + "Yen!");
+                        moneys4.setFont(new Font("Serif", Font.PLAIN,14));
+                        moneys5.setText("$" + budg + "   =   " + dirham + "Dirhams!");
+                        moneys5.setFont(new Font("Serif", Font.PLAIN,14));
+                        moneys6.setText("$" + budg + "   =   " + bitcoiny + "Bitcoins!");
+                        moneys6.setFont(new Font("Serif", Font.PLAIN,14));
+
+                        JOptionPane.showMessageDialog(frame, "$" + budg + "   =   " + won + " Won!\n"+"$" + budg + "   =   "+ rupees + " Rupees!\n"+"$" + budg + "   =   " + euro + " Euros!\n"+"$" + budg + "   =   " + yen + " Yen!\n"+"$" + budg + "   =   " + dirham + " Dirhams!\n"+"$" + budg + "   =   " + bitcoiny + " Bitcoins!","Conversions",0);
+                        frame.remove(moneys);
+                        frame.add(moneys);
                         frame.setSize(399,399);
                         frame.setSize(frame.getMaximumSize());
                     };

@@ -18,7 +18,7 @@ public class AudioPlayer {
         panel.setSize(400,400);
         panel.setVisible(true);
         try {
-            AudioInputStream audioInputStream =  AudioSystem.getAudioInputStream(new File("C:\\Users\\Rishi (New)\\Downloads\\sound\\crab rave.wav").getAbsoluteFile()); 
+            //AudioInputStream audioInputStream =  AudioSystem.getAudioInputStream(new File("C:\\Users\\Rishi (New)\\Downloads\\sound\\crab rave.wav").getAbsoluteFile()); 
             clip = AudioSystem.getClip();
             //clip.open(audioInputStream);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
@@ -30,8 +30,7 @@ public class AudioPlayer {
         JButton pause = new JButton("Play");
         JButton play = new JButton("Play");
         panel.setLayout(null);
-        pause.setBounds(100,100,100,100);
-        pause.setBounds(100,210,100,100);
+        pause.setBounds(100,50,100,100);
         panel.add(play);
         panel.add(pause);
         pause.addActionListener(new ActionListener() {
