@@ -28,7 +28,8 @@ public class Gaming {
         JMenu mouseMacro = new JMenu("Mouse Macro");
         JMenu systemStats = new JMenu("System Stats");
         JPanel audioPanel = audioplayer.createPanel();
-        
+        JPanel keyboardPanel = keyBoardMacro.createPanel();
+        JPanel mousePanel = mousemacro.createPanel();
         menuBar.add(autoclicker);
         menuBar.add(keyBoardScript);
         menuBar.add(audioPlayer);
@@ -71,7 +72,7 @@ public class Gaming {
             @Override
             public void mousePressed(MouseEvent e) {
                 frame.remove(currentPanel);
-                currentPanel = keyBoardMacro.createPanel();
+                currentPanel = keyboardPanel;
                 frame.add(currentPanel);
                 frame.setSize(499,499);
                 frame.setSize(500,500);
@@ -125,7 +126,7 @@ public class Gaming {
             @Override
             public void mousePressed(MouseEvent e) {
                 frame.remove(currentPanel);
-                currentPanel = mousemacro.createPanel();
+                currentPanel = mousePanel;
                 frame.add(currentPanel);
                 frame.setSize(499,499);
                 frame.setSize(500,500);

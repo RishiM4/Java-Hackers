@@ -32,7 +32,7 @@ public class KeyBoardMacro implements NativeKeyListener{
     public void nativeKeyReleased(NativeKeyEvent e){
         
     }
-    static private void startMacro() {
+    private void startMacro() {
         System.err.println("HI");
         try {
             

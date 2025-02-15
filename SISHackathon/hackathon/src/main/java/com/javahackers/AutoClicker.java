@@ -106,7 +106,7 @@ public class AutoClicker implements NativeKeyListener{
         frame.add(label);
         frame.setSize(400,400);
         JButton button = new JButton();
-        
+        JOptionPane.showMessageDialog(frame, "Hello\npoe", null, 0);
         button.setBounds(100,100,150,50);
         button.setText("Start Autoclicker");
         JTextField textField = new JTextField("                Delay");
